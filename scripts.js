@@ -9,20 +9,20 @@
         var length = alphabet.length;
 
         switch (direction) {
-            case 'forward': return index + jump > length ? (index + jump) - length : index + jump;
+            case 'forward': return index + jump >= length ? (index + jump) - length : index + jump;
             case 'backward': return index - jump < 0 ? (index - jump) + length : index - jump;
         }
     }
 
     var sanitize = function(text) {
         text = text.toUpperCase();
-        text = text.replace(/ÁÀÂÃÄª/, 'A');
-        text = text.replace(/ÉÈÊË/, 'E');
-        text = text.replace(/ÍÌÎÏ/, 'I');
-        text = text.replace(/ÓÒÕÔÖº°/, 'O');
-        text = text.replace(/ÚÙÛÜ/, 'U');
-        text = text.replace(/Ç/, 'C');
-        text = text.replace(/Ñ/, 'N');
+        text = text.replace(/[ÁÀÂÃÄª]/, 'A');
+        text = text.replace(/[ÉÈÊË]/, 'E');
+        text = text.replace(/[ÍÌÎÏ]/, 'I');
+        text = text.replace(/[ÓÒÕÔÖº°]/, 'O');
+        text = text.replace(/[ÚÙÛÜ]/, 'U');
+        text = text.replace(/[Ç]/, 'C');
+        text = text.replace(/[Ñ]/, 'N');
         return text;
     }
 
@@ -31,7 +31,7 @@
         var cipheredText = "";
         
         for(var i = 0; i < sanitizedText.length; i++) {
-            if (ignoredChars.indexOf(sanitizedText[i])) {
+            if (ignoredChars.indexOf(sanitizedText[i]) > -1) {
                 cipheredText += sanitizedText[i];
             } else {
                 var index = alphabet.indexOf(sanitizedText[i]);
@@ -47,7 +47,7 @@
         var decipheredText = "";
         
         for(var i = 0; i < sanitizedText.length; i++) {
-            if (ignoredChars.indexOf(sanitizedText[i])) {
+            if (ignoredChars.indexOf(sanitizedText[i]) > -1) {
                 decipheredText += sanitizedText[i];
             } else {
                 var index = alphabet.indexOf(sanitizedText[i]);
