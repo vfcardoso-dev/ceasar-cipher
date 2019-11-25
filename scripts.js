@@ -2,6 +2,7 @@
 
 (function(){
     var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    var ignoredChars = [' ','?','!','.',',',';',':','/','~','^','"','\'','{','}','[',']','(',')','@','#','$','%','¨','&','*','-','_','|','\\','<','>','+','=','§'];
     
     var shiftIndex = function(index, direction) {
         var jump = 3;
@@ -13,12 +14,24 @@
         }
     }
 
+    var sanitize = function(text) {
+        text = text.toUpperCase();
+        text = text.replace(/ÁÀÂÃÄª/, 'A');
+        text = text.replace(/ÉÈÊË/, 'E');
+        text = text.replace(/ÍÌÎÏ/, 'I');
+        text = text.replace(/ÓÒÕÔÖº°/, 'O');
+        text = text.replace(/ÚÙÛÜ/, 'U');
+        text = text.replace(/Ç/, 'C');
+        text = text.replace(/Ñ/, 'N');
+        return text;
+    }
+
     var doCipher = function(text) {
-        var sanitizedText = text.toUpperCase();
+        var sanitizedText = sanitize(text);
         var cipheredText = "";
         
         for(var i = 0; i < sanitizedText.length; i++) {
-            if (sanitizedText[i] == ' ') {
+            if (ignoredChars.indexOf(sanitizedText[i])) {
                 cipheredText += sanitizedText[i];
             } else {
                 var index = alphabet.indexOf(sanitizedText[i]);
@@ -34,7 +47,7 @@
         var decipheredText = "";
         
         for(var i = 0; i < sanitizedText.length; i++) {
-            if (sanitizedText[i] == ' ') {
+            if (ignoredChars.indexOf(sanitizedText[i])) {
                 decipheredText += sanitizedText[i];
             } else {
                 var index = alphabet.indexOf(sanitizedText[i]);
