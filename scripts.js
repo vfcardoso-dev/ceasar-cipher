@@ -14,15 +14,14 @@
     }
 
     const sanitize = (text) => {
-        text = text.toUpperCase();
-        text = text.replace(/[ÁÀÂÃÄª]/, 'A');
-        text = text.replace(/[ÉÈÊË]/, 'E');
-        text = text.replace(/[ÍÌÎÏ]/, 'I');
-        text = text.replace(/[ÓÒÕÔÖº°]/, 'O');
-        text = text.replace(/[ÚÙÛÜ]/, 'U');
-        text = text.replace(/[Ç]/, 'C');
-        text = text.replace(/[Ñ]/, 'N');
-        return text;
+        return text.toUpperCase()
+            .replace(/[ÁÀÂÃÄª]/, 'A')
+            .replace(/[ÉÈÊË]/, 'E')
+            .replace(/[ÍÌÎÏ]/, 'I')
+            .replace(/[ÓÒÕÔÖº°]/, 'O')
+            .replace(/[ÚÙÛÜ]/, 'U')
+            .replace(/[Ç]/, 'C')
+            .replace(/[Ñ]/, 'N');
     }
 
     const doCipher = (text) => {
